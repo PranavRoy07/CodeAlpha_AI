@@ -1,19 +1,3 @@
-# ============================================================
-#   ARIA — Advanced Technical FAQ Chatbot
-#   CodeAlpha AI Internship — Task 2  (Upgraded)
-#
-#   Architecture:
-#     Layer 1  →  TF-IDF + Cosine Similarity (offline FAQ bank)
-#     Layer 2  →  Claude claude-sonnet-4-20250514 API (dynamic fallback)
-#
-#   Install dependencies:
-#     pip install nltk scikit-learn anthropic
-#
-#   Set your API key once (terminal):
-#     Windows:  set ANTHROPIC_API_KEY=sk-ant-...
-#     Mac/Linux: export ANTHROPIC_API_KEY=sk-ant-...
-#   OR paste it directly in the API_KEY variable below (dev only).
-# ============================================================
 
 import tkinter as tk
 from tkinter import scrolledtext
@@ -27,8 +11,7 @@ from nltk.stem import PorterStemmer
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 
-# ── Optional: hard-code key here for local dev only ─────────
-API_KEY = "sk-ant-api03-xxx"   # leave "" to force env var
+API_KEY = "sk-ant-api03-xxx"
 
 try:
     import anthropic
@@ -38,15 +21,9 @@ except ImportError:
 
 from faqs import FAQ_DATA
 
-# ─────────────────────────────────────────────
-#   NLTK bootstrap
-# ─────────────────────────────────────────────
 for pkg in ("stopwords", "punkt", "punkt_tab"):
     nltk.download(pkg, quiet=True)
 
-# ─────────────────────────────────────────────
-#   NLP ENGINE  — Layer 1
-# ─────────────────────────────────────────────
 
 stemmer    = PorterStemmer()
 stop_words = set(stopwords.words("english"))
@@ -85,12 +62,11 @@ faq_questions  = [item["question"] for item in FAQ_DATA]
 faq_answers    = [item["answer"]   for item in FAQ_DATA]
 processed_faqs = [preprocess(q)    for q    in faq_questions]
 
-# Bigram-aware TF-IDF for better phrase matching
 vectorizer   = TfidfVectorizer(ngram_range=(1, 2))
 tfidf_matrix = vectorizer.fit_transform(processed_faqs)
 
-FAQ_THRESHOLD = 0.20    # above → answer from FAQ bank
-API_THRESHOLD = 0.10    # below → definitely use Claude API
+FAQ_THRESHOLD = 0.20    
+API_THRESHOLD = 0.10    
 
 
 def faq_lookup(user_input: str) -> tuple[str | None, float]:
@@ -105,9 +81,6 @@ def faq_lookup(user_input: str) -> tuple[str | None, float]:
     return None, best_score
 
 
-# ─────────────────────────────────────────────
-#   CLAUDE API  — Layer 2
-# ─────────────────────────────────────────────
 
 SYSTEM_PROMPT = (
     "You are ARIA (AI Research & Information Assistant), an expert technical chatbot. "
@@ -153,9 +126,6 @@ def ask_claude(user_input: str) -> str:
         return f"⚠️  API error: {exc}"
 
 
-# ─────────────────────────────────────────────
-#   ROUTING LOGIC
-# ─────────────────────────────────────────────
 
 GREETINGS = {"hi", "hello", "hey", "hii", "helo", "sup", "yo", "howdy"}
 FAREWELLS = {"bye", "goodbye", "exit", "quit", "thanks", "thank you", "thankyou"}
@@ -188,19 +158,14 @@ def route(user_input: str) -> tuple[str, str, str]:
             "farewell", "👋 Goodbye"
         )
 
-    # Layer 1 — FAQ
     faq_answer, score = faq_lookup(user_input)
     if faq_answer:
         return faq_answer, "faq", domain
 
-    # Layer 2 — Claude
     claude_answer = ask_claude(user_input)
     return claude_answer, "claude", domain
 
 
-# ─────────────────────────────────────────────
-#   UI CONSTANTS
-# ─────────────────────────────────────────────
 
 BG      = "#1e1e2e"
 SURFACE = "#313244"
@@ -216,10 +181,6 @@ TEAL    = "#94e2d5"
 TYPING_FRAMES = ["⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏"]
 
 
-# ─────────────────────────────────────────────
-#   UI LOGIC
-# ─────────────────────────────────────────────
-
 _typing_job = None
 _typing_idx = 0
 _typing_marker = None
@@ -230,7 +191,7 @@ def _animate_typing():
     if _typing_marker is None:
         return
     chat_box.config(state="normal")
-    # overwrite the typing line
+   
     chat_box.delete(_typing_marker, f"{_typing_marker} lineend")
     frame = TYPING_FRAMES[_typing_idx % len(TYPING_FRAMES)]
     chat_box.insert(_typing_marker, f"  {frame}  ARIA is thinking…", "typing_tag")
@@ -258,7 +219,7 @@ def _stop_typing():
         _typing_job = None
     if _typing_marker:
         chat_box.config(state="normal")
-        # delete from marker to end of that line + newline
+       
         chat_box.delete(f"{_typing_marker} -1c linestart", f"{_typing_marker} lineend +1c")
         chat_box.config(state="disabled")
         _typing_marker = None
@@ -358,17 +319,12 @@ def show_welcome():
     chat_box.config(state="disabled")
 
 
-# ─────────────────────────────────────────────
-#   BUILD ROOT WINDOW
-# ─────────────────────────────────────────────
-
 root = tk.Tk()
 root.title(f"{BOT_NAME} — Advanced Technical Chatbot | CodeAlpha AI Internship Task 2")
 root.geometry("720x640")
 root.resizable(False, False)
 root.configure(bg=BG)
 
-# ── Header ──────────────────────────────────
 header = tk.Frame(root, bg=BG)
 header.pack(fill="x", padx=20, pady=(16, 6))
 
@@ -388,7 +344,6 @@ tk.Label(
 
 tk.Frame(root, bg=SURFACE, height=1).pack(fill="x", padx=20, pady=(0, 8))
 
-# ── Chat Window ─────────────────────────────
 chat_box = scrolledtext.ScrolledText(
     root,
     font=("Segoe UI", 11),
@@ -401,7 +356,6 @@ chat_box = scrolledtext.ScrolledText(
 )
 chat_box.pack(fill="both", expand=True, padx=20)
 
-# ── Input Row ───────────────────────────────
 input_frame = tk.Frame(root, bg=BG)
 input_frame.pack(fill="x", padx=20, pady=12)
 
@@ -439,7 +393,6 @@ clear_btn = tk.Button(
 )
 clear_btn.pack(side="left", padx=(6, 0))
 
-# ── Status bar ──────────────────────────────
 tk.Frame(root, bg=SURFACE, height=1).pack(fill="x", padx=20)
 
 status_var = tk.StringVar()
@@ -458,8 +411,6 @@ tk.Label(
     font=("Segoe UI", 8),
     bg=BG, fg=SUBTEXT
 ).pack(pady=(4, 8))
-
-# ── Launch ──────────────────────────────────
 show_welcome()
 input_field.focus()
 root.mainloop()
