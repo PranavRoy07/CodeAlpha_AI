@@ -1,0 +1,349 @@
+🤖 CodeAlpha — Artificial Intelligence Internship
+
+
+Completed by Pranav **BBACA** Graduate | Pune
+
+
+📋 Table of Contents ### About This Internship Task 1 — Language Translation Tool Task 2 — **FAQ** Chatbot (**ARIA**) Task 4 — Object Detection & Tracking (**TITAN**) How to Run All Projects What I Learned ### Project Structure Acknowledgements Contact 🏢 About This Internship
+
+
+This repository contains my completed projects for the CodeAlpha Artificial Intelligence Internship. During this internship, I worked on multiple real-world AI and Machine Learning projects using Python and desktop application development.
+
+
+Out of the provided AI tasks, I successfully completed 3 major projects involving:
+
+
+Natural Language Processing (**NLP**)
+### Computer Vision
+Real-Time Object Tracking
+### Translation Systems
+### Desktop Application Development
+✅ Internship Tasks
+Task    Project Status
+Task 1  Language Translation Tool   ✅ Completed
+Task 2  **FAQ** Chatbot (**ARIA**)  ✅ Completed
+Task 3  Music Generation with AI    ⏭ Skipped
+Task 4  Object Detection & Tracking (**TITAN**) ✅ Completed
+
+
+🌐 Task 1 — Language Translation Tool
+📌 What is this?
+
+
+A desktop application that translates text from one language to another.
+
+
+The user can:
+
+
+Enter text Select source language Select target language Translate instantly
+
+
+It works similarly to a mini version of Google Translate built completely in Python.
+
+
+⚙️ How It Works User enters text Application reads source and target language Text is sent to Google's translation engine using the deep-translator library Translated response is returned Result is displayed instantly
+
+
+Note: No paid **API** key is required.
+
+
+✨ Features
+🌍 Supports 20+ languages
+🔍 Auto-detect source language
+⇄ Swap language button
+📋 Copy translated text
+🗑 Clear text instantly
+📊 Status bar updates
+🌙 Dark-themed modern UI
+🛠 Technologies Used
+Technology  Purpose
+Python  Core programming language
+Tkinter Desktop **GUI** framework
+deep-translator Google Translate integration
+🖥 Screenshot (UI Layout)
+┌─────────────────────────────────────────────────────┐
+│ 🌐 Language Translation Tool     CodeAlpha Task 1  │
+│ ────────────────────────────────────────────────── │
+│  From [Auto Detect ▼]    ⇄    To [Hindi ▼]         │
+│                                                     │
+│  ┌─────────────────┐    ┌─────────────────┐         │
+│  │  Enter Text...  │    │  Translated...  │         │
+│  │                 │    │                 │         │
+│  └─────────────────┘    └─────────────────┘         │
+│                                                     │
+│   [Translate ➜]   [📋 Copy]   [🗑 Clear]            │
+│  ✅ Translated: English → Hindi                     │
+└─────────────────────────────────────────────────────┘
+🤖 Task 2 — **FAQ** Chatbot (**ARIA**)
+📌 What is this?
+
+
+**ARIA** stands for:
+
+
+AI Research & Information Assistant
+
+
+It is a desktop chatbot capable of answering questions related to:
+
+
+### Artificial Intelligence
+
+
+### Machine Learning Python **SQL** Java ### Data Structures ### Web Development ### Cloud Computing Networking Cybersecurity
+
+
+The chatbot uses **NLP** techniques to understand the meaning of user questions instead of exact keyword matching.
+
+
+⚙️ How It Works Step 1 — Text Preprocessing
+
+
+At startup, all **FAQ** data is cleaned using **NLP** techniques:
+
+
+Convert text to lowercase Remove punctuation Remove stopwords Apply stemming Example *running machines* → *run machin* Step 2 — TF-**IDF** Vectorization
+
+
+Questions are converted into numerical vectors using TF-**IDF**.
+
+
+TF (Term Frequency)
+
+
+Measures how often a word appears in a question.
+
+
+**IDF** (Inverse Document Frequency)
+
+
+Measures how important or rare a word is across all FAQs.
+
+
+This creates a unique mathematical fingerprint for every question.
+
+
+Step 3 — User Input Processing
+
+
+The user's question goes through the same preprocessing and vectorization pipeline.
+
+
+Step 4 — Cosine Similarity
+
+
+The chatbot compares the user's vector against all **FAQ** vectors.
+
+
+### Similarity Scale
+
+
+Score   Meaning
+1.0 Identical meaning
+0.0 Completely unrelated
+
+
+The highest-scoring **FAQ** is selected.
+
+
+Step 5 — Response Generation If similarity score > 0.15 → Return answer Otherwise → Ask user to rephrase the question 🧠 Why This Is Smart
+
+
+The chatbot understands contextual similarity.
+
+
+Example *how does ML work?*
+
+
+Can correctly match:
+
+
+*What is Machine Learning?*
+📚 Topics Covered
+Domain  Example Questions
+AI & ML What is deep learning?
+Python  What is list comprehension?
+**SQL** What is **ACID**?
+Java    What is **JVM**?
+Web Development What is **REST** **API**?
+**DSA** What is Big O notation?
+Git Merge vs Rebase
+Cloud Computing What is Docker?
+Networking  **TCP** vs **UDP**
+Cybersecurity   What is **SQL** Injection?
+🛠 Technologies Used
+Technology  Purpose
+Python  Core programming
+**NLTK**    **NLP** preprocessing
+Scikit-learn    TF-**IDF** + cosine similarity
+Tkinter Chat UI
+🖥 Screenshot (UI Layout)
+┌──────────────────────────────────────────┐
+│ 🤖 **ARIA** — **FAQ** Chatbot    CodeAlpha Task 2│
+│ ──────────────────────────────────────── │
+│                                          │
+│  **ARIA**                                    │
+│  👋 Hi! I'm **ARIA** — AI Research &         │
+│  Information Assistant. Ask me anything  │
+│  about AI, ML, Python, **SQL**...            │
+│                                          │
+│  You                                     │
+│  what is machine learning                │
+│                                          │
+│  **ARIA**                                    │
+│  Machine Learning (ML) is a subset of   │
+│  AI where systems learn from data...     │
+│                                          │
+│ ──────────────────────────────────────── │
+│ [Type your question here...] [Send ➜][🗑]│
+│ Powered by **NLTK** + TF-**IDF** + Cosine | **170**+│
+└──────────────────────────────────────────┘
+🎯 Task 4 — Object Detection & Tracking (**TITAN**)
+📌 What is this?
+
+
+**TITAN** stands for:
+
+
+Tracking & Identification Technology for Autonomous Networks
+
+
+It is a real-time AI application capable of:
+
+
+Detecting objects from webcam/video Tracking moving objects Detecting hands and body pose Drawing full body skeletons Assigning tracking IDs to objects ⚙️ How It Works
+
+
+**TITAN** uses three AI engines simultaneously.
+
+
+🧠 Engine 1 — YOLOv8 (Object Detection)
+
+
+YOLOv8 detects:
+
+
+Person Phone Laptop Chair Bottle Car Dog 70+ more object classes Features Bounding boxes Confidence score Real-time detection Persistent object IDs using ByteTrack 🧠 Engine 2 — MediaPipe Pose
+
+
+Detects:
+
+
+Full body skeleton 33 body landmarks Hands Legs Arms Ankles Knees 🧠 Engine 3 — MediaPipe Hands
+
+
+Detects:
+
+
+Left and right hand separately
+21 finger landmarks per hand
+Detailed finger movement tracking
+✨ Features
+🎯 80 **COCO** object classes
+🦴 Full-body skeleton tracking
+✋ Hand landmark detection
+👣 Leg tracking
+📈 Motion trails
+📊 **FPS** monitoring
+🖥 **HUD** overlay
+🔲 Rule-of-thirds grid
+⌨ Keyboard Controls
+Key Action
+P   Pause / Resume
+Q   Quit
+G   Toggle Grid
+T   Toggle Motion Trails
+S   Toggle Skeleton
+🛠 Technologies Used
+Technology  Purpose
+Python  Core programming
+YOLOv8  Object detection
+ByteTrack   Object tracking
+MediaPipe   Pose & hand tracking
+OpenCV  Video processing
+Tkinter Desktop control panel
+🖥 Screenshot (UI Layout)
+┌──────────────────────────────────────────────┐
+│ 🎯 **TITAN**          CodeAlpha AI Internship    │
+│ ─────────────────────────────────────────── │
+│  ● **YOLO** v8   ● MP Pose   ● MP Hands          │
+│                                              │
+│ 📹 Video Source                              │
+│   ◉ Webcam (index 0)                         │
+│   ○ Video File          [Browse…]            │
+│                                              │
+│ 🧠 **YOLO** Model  [YOLOv8 Nano (fastest) ▼]    │
+│                                              │
+│ 🎚️ Confidence  [━━━━━━━━━━━━━━━━] 0.45      │
+│                                              │
+│ 📊 Live Stats                                │
+│   **FPS**        Objects      Status             │
+│   30.2          4         Running            │
+│                                              │
+│  [▶ Start Detection]    [■ Stop]             │
+│ ─────────────────────────────────────────── │
+│  [P] Pause / Resume   [Q] Quit               │
+└──────────────────────────────────────────────┘
+🚀 How to Run All Projects
+📌 Prerequisites
+Python 3.9+
+pip
+Internet connection (for first-time model downloads)
+⚙️ One-Time Setup
+pip install deep-translator nltk scikit-learn ultralytics opencv-python numpy
+
+
+pip uninstall mediapipe -y
+
+
+pip install mediapipe==0.10.9
+
+
+Important: MediaPipe version 0.10.9 is required because newer versions contain breaking changes.
+
+
+▶ Run Projects Task 1 — Language Translation Tool cd CodeAlpha_LanguageTranslation python translator.py Task 2 — **FAQ** Chatbot cd CodeAlpha_FAQChatbot python chatbot.py
+
+
+**NLTK** data will automatically download during first launch.
+
+
+Task 4 — Object Detection & Tracking cd CodeAlpha_ObjectDetection python detector_v2.py
+
+
+YOLOv8 weights will automatically download during first launch.
+
+
+📚 What I Learned
+
+
+This internship helped me gain practical experience in AI development and desktop application engineering.
+
+
+🧠 Natural Language Processing (Task 2)
+
+
+Learned:
+
+
+Text preprocessing Tokenization Stopword removal Stemming TF-**IDF** vectorization Cosine similarity 👁 Computer Vision & Deep Learning (Task 4)
+
+
+Learned:
+
+
+YOLOv8 object detection Real-time tracking MediaPipe pose estimation Difference between inference and training Real-time landmark processing 🐍 General Python Skills
+
+
+Learned:
+
+
+Tkinter desktop UI development **OOP** structure Exception handling Threading for responsive apps Project organization 📁 Project Structure CodeAlpha-AI-Internship/ │ ├── CodeAlpha_LanguageTranslation/ │   ├── translator.py │   └── requirements.txt │ ├── CodeAlpha_FAQChatbot/ │   ├── chatbot.py │   ├── faqs.py │   └── requirements.txt │ ├── CodeAlpha_ObjectDetection/ │   ├── detector_v2.py │   └── requirements.txt │ └── **README**.md 🙏 Acknowledgements CodeAlpha for the internship opportunity Ultralytics for YOLOv8 Google MediaPipe **NLTK** Team Scikit-learn Team 📬 Contact
+
+
+Pranav **BBACA** Graduate Modern College of Arts, Science and Commerce, Pune
+
+
+"The best way to learn AI is to build something with it."
+convert the above text into perfect readme file which shows perfect diagram structure and explain as a output.
